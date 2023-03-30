@@ -135,7 +135,8 @@ var model = [{
     tag: 'h2',
     styles: {
       background: '#eee',
-      color: '#fff'
+      color: '#fff',
+      'text-align': 'center'
     }
   }
 }, {
@@ -170,6 +171,10 @@ function col(content) {
 function css() {
   var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var keys = Object.keys(styles);
+  var array = keys.map(function (key) {
+    return "".concat(key, ": ").concat(styles[key]);
+  });
+  return array.join(';');
 }
 },{}],"templates.js":[function(require,module,exports) {
 "use strict";
@@ -190,9 +195,7 @@ function text(block) {
   return (0, _utils.row)((0, _utils.col)("<p>".concat(block.value, "</p>")));
 }
 function columns(block) {
-  console.log(block.value);
   var html = block.value.map(_utils.col).join('');
-  console.log(html);
   return (0, _utils.row)(html);
 }
 function image(block) {

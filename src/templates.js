@@ -10,9 +10,7 @@ function text(block) {
 }
 
 function columns(block) {
-    console.log(block.value)
     let html = block.value.map(col).join('')
-    console.log(html)
     return row(html)
 }
 

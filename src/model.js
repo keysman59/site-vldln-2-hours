@@ -8,7 +8,8 @@ export const model = [
             tag: 'h2',
             styles: {
                 background: '#eee', 
-                color: '#fff'
+                color: '#fff',
+                'text-align': 'center'
             } 
         }
     },
