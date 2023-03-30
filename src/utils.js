@@ -1,7 +1,7 @@
 // вспомогательные функции - утилиты
 
 export function row(content, styles = '') {
-    return `<div class="row" style="${styles}>${content}</div>`
+    return `<div class="row" style="${styles}">${content}</div>`
 }
 
 export function col(content) {
@@ -9,7 +9,5 @@ export function col(content) {
 }
 
 export function css(styles = {}) {
-    console.log(styles)
     const keys = Object.keys(styles)
-    console.log(keys)
 }
