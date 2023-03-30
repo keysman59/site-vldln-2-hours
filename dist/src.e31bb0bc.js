@@ -119,6 +119,26 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"assets/image.png":[function(require,module,exports) {
 module.exports = "/image.90ac9039.png";
+},{}],"classes/blocks.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Block = void 0;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var Block = /*#__PURE__*/_createClass(function Block(type, value, options) {
+  _classCallCheck(this, Block);
+  this.type = type;
+  this.value = value;
+  this.options = options;
+});
+exports.Block = Block;
 },{}],"model.js":[function(require,module,exports) {
 "use strict";
 
@@ -127,16 +147,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.model = void 0;
 var _image = _interopRequireDefault(require("./assets/image.png"));
+var _blocks = require("./classes/blocks");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-var model = [{
-  type: 'title',
-  value: 'Конструктор сайтов на чистом JavaScript',
+console.log(_blocks.Block);
+var model = [new _blocks.Block('title', 'Конструктор сайтов на чистом JavaScript', {
+  tag: 'h2',
+  styles: {
+    background: '#eee',
+    color: '#fff',
+    'text-align': 'center'
+  }
+}), {
+  type: 'image',
+  value: _image.default,
   options: {
-    tag: 'h2',
     styles: {
-      background: '#eee',
-      color: '#fff',
-      'text-align': 'center'
+      padding: '2rem 0',
+      display: 'flex',
+      'justify-content': 'center'
     }
   }
 }, {
@@ -145,12 +173,9 @@ var model = [{
 }, {
   type: 'columns',
   value: ['111111111', '222222222', '333333333', '444444444']
-}, {
-  type: 'image',
-  value: _image.default
 }];
 exports.model = model;
-},{"./assets/image.png":"assets/image.png"}],"utils.js":[function(require,module,exports) {
+},{"./assets/image.png":"assets/image.png","./classes/blocks":"classes/blocks.js"}],"utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -170,11 +195,10 @@ function col(content) {
 }
 function css() {
   var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var keys = Object.keys(styles);
-  var array = keys.map(function (key) {
+  var toString = function toString(key) {
     return "".concat(key, ": ").concat(styles[key]);
-  });
-  return array.join(';');
+  };
+  return Object.keys(styles).map(toString).join(';');
 }
 },{}],"templates.js":[function(require,module,exports) {
 "use strict";
@@ -269,6 +293,7 @@ module.hot.accept(reloadCSS);
 var _model = require("./model");
 var _templates = require("./templates");
 require("./styles/main.css");
+// https://github.com/vladilenm/js-constructor/blob/master/src/model.js
 var site = document.querySelector('#site');
 _model.model.forEach(function (block) {
   var toHTML = _templates.templates[block.type];
