@@ -6,7 +6,10 @@ export const model = [
         value: 'Конструктор сайтов на чистом JavaScript',
         options: {
             tag: 'h2',
-            styles: `background: #eee; color: #fff`
+            styles: {
+                background: '#eee', 
+                color: '#fff'
+            } 
         }
     },
     {
