@@ -296,6 +296,7 @@ var Site = /*#__PURE__*/function () {
     value: function render(model) {
       var _this = this;
       model.forEach(function (block) {
+        console.log(block);
         _this.$el.insertAdjacentHTML('beforeend', block.toHTML());
       });
     }
@@ -310,6 +311,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Sidebar = void 0;
+exports.block = block;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
@@ -320,9 +322,14 @@ var Sidebar = /*#__PURE__*/function () {
   function Sidebar(selector) {
     _classCallCheck(this, Sidebar);
     this.$el = document.querySelector(selector);
-    this.$el.insertAdjacentHTML('afterbegin', this.template);
+    this.init();
   }
   _createClass(Sidebar, [{
+    key: "init",
+    value: function init() {
+      this.$el.insertAdjacentHTML('afterbegin', this.template);
+    }
+  }, {
     key: "template",
     get: function get() {
       return '<h1>template</h1>';
@@ -331,6 +338,9 @@ var Sidebar = /*#__PURE__*/function () {
   return Sidebar;
 }();
 exports.Sidebar = Sidebar;
+function block(type) {
+  return "\n        <form name=\"".concat(type, "\">\n            <h5>").concat(type, "</h5>\n            <div class=\"form-group\">\n                <input class=\"form-control form-control-sm\" name=\"value\" placeholder=\"value\" type=\"text\">\n            </div>\n            <div class=\"form-group\">\n                <input class=\"form-control form-control-sm\" name=\"styles\" placeholder=\"styles\" type=\"text\">\n            </div>\n            <button type=\"submit\" class=\"btn btn-primary btn-sm\">\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C</button>\n        </form> \n        </hr />\n    ");
+}
 },{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
@@ -394,6 +404,7 @@ var _site = require("./classes/site");
 var _sidebar = require("./classes/sidebar");
 require("./styles/main.css");
 var site = new _site.Site('#site');
+console.log(site);
 site.render(_model.model);
 var sidebar = new Sidebar('#panel');
 },{"./model":"model.js","./classes/site":"classes/site.js","./classes/sidebar":"classes/sidebar.js","./styles/main.css":"styles/main.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -421,7 +432,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61382" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53368" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
